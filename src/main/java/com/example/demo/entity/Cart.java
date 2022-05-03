@@ -14,8 +14,20 @@ import java.util.UUID;
 @Setter
 @Entity
 public class Cart {
+
+    //Todas las relaciones hechas
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private UUID id;
+
+    @ManyToOne
+    @JoinColumn(name="id_product",nullable = false)
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name="id_user_info",nullable = false)
+    private UserInfo userInfo;
+
+
 }

@@ -18,6 +18,10 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private UUID id;
+    private String url;
+    @ManyToOne
+    @JoinColumn(name="id_product",nullable = false)
+    private Product product;
 
 
 }

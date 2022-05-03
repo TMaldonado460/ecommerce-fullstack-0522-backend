@@ -20,4 +20,14 @@ public class UserInfo {
     private String name;
 
 
+
+    @OneToMany(mappedBy = "userInfo")
+    private Adress adress;
+
+    @OneToMany(mappedBy = "userInfo")
+    private Cart cart;
+
+
+
+
 }
