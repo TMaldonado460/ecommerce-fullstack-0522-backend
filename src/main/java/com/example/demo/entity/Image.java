@@ -18,4 +18,6 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private UUID id;
+
+
 }

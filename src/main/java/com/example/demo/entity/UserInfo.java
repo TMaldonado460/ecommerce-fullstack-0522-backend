@@ -11,7 +11,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "user_info")
-public class User_info {
+public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
