@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.UUID;
-@Data  
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
