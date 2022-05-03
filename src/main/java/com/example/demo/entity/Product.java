@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -32,5 +33,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private Cart cart;
+
+    // Agrego la relación "Many to Many" con clase Bill.
+    @ManyToMany(mappedBy = "products")
+    private Set<Bill> bills;
 
 }

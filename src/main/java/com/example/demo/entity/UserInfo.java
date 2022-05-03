@@ -28,7 +28,10 @@ public class UserInfo {
     @OneToMany(mappedBy = "userInfo")
     private Cart cart;
 
+    //Agrego las relaciones de "One to Many" desde la clase UserInfo a las clases Review y Bill
+    @OneToMany(mappedBy = "userInfo")
+    private Review review;
 
-
-
+    @OneToMany(mappedBy = "userInfo")
+    private Bill bill;
 }
