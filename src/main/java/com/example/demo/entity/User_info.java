@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.UUID;
-@Data //agrega getters y setters
+@Data  
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
