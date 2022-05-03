@@ -27,4 +27,7 @@ public class Review {
     @ManyToOne
     @JoinColumn(name="product",nullable = false)
     private Product product;
+
+
+    private String comment;
 }

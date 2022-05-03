@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name="id_product",nullable = false)
-    private Product product;
+    private Set<Product> product=new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name="id_user_info",nullable = false)

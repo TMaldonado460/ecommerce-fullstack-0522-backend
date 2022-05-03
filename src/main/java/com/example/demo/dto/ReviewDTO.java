@@ -16,6 +16,7 @@ public class ReviewDTO {
     //todas hechas
 
     private UUID id;
+    private String comment;
 
 
 }
