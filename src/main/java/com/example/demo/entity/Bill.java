@@ -14,13 +14,12 @@ import java.util.UUID;
 @Setter
 @Entity
 public class Bill {
+    //Hacer relacion @Many to many
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private UUID id;
 
 
-    @ManyToOne
-    @JoinColumn(name="id_user_info",nullable = false)
-    private UserInfo userInfo;
+
 }

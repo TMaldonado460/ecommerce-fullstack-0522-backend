@@ -12,6 +12,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "user_info")
 public class UserInfo {
+    // suerte facu
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

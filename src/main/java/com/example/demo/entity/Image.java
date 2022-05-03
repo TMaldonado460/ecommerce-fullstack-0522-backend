@@ -14,6 +14,7 @@ import java.util.UUID;
 @Setter
 @Entity
 public class Image {
+    //relaciones hechas
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

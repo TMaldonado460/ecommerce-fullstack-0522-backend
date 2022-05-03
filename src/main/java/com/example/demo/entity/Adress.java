@@ -6,6 +6,7 @@ import java.util.UUID;
 @Entity
 @Table(name="adress")
 public class Adress {
+    //Relacion hecha
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

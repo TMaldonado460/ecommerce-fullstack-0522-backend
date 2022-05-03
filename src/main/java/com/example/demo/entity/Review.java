@@ -13,6 +13,7 @@ import java.util.UUID;
 @Setter
 @Entity
 public class Review {
+    //todas hechas
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

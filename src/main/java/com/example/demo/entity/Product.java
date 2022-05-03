@@ -13,6 +13,7 @@ import java.util.UUID;
 @Entity
 @Table(name="product")
 public class Product {
+    // suerte facu
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
