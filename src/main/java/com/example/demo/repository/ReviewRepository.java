@@ -12,4 +12,7 @@ import java.util.UUID;
 public interface ReviewRepository extends JpaRepository<Review, UUID> {
     @Query
     List<Review> findAllByProduct_id(UUID product_id);
+    @Query
+    List<Review> findByUserId(UUID userId);
+
 }
