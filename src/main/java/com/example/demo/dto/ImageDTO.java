@@ -13,8 +13,6 @@ import java.util.UUID;
 @Setter
 
 public class ImageDTO {
-    //relaciones hechas
-
     private UUID id;
     private String url;
 

@@ -14,8 +14,6 @@ import java.util.UUID;
 @Setter
 
 public class AdressDTO {
-    //Relacion hecha
-
     private UUID id;
     private String street;
     private Integer locationNumber;

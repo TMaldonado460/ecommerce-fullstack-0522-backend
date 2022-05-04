@@ -11,8 +11,6 @@ import java.util.UUID;
 @Getter
 
 public class ProductDTO {
-    // suerte facu
-
     private UUID id;
     private String name;
     private Double price;

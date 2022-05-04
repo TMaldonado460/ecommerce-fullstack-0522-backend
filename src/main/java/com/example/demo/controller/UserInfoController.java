@@ -9,16 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.UUID;
 
-@RestController @RequestMapping("user_info")
+@RestController
+@RequestMapping("user_info")
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
+
+    // CRUD
     @PostMapping()
     public UserInfoDTO createUserInfo(@RequestBody UserInfoDTO userInfo) {
         return userInfoService.createUserInfo(userInfo);
     }
+
     @GetMapping("{id}")
     public Optional<UserInfo> getUserInfo(@RequestParam UUID id) {
         return userInfoService.getUserInfo(id);
     }
+
+    // TODO Get All
+
+    // TODO Put (Update)
+
+    // TODO delete
 }

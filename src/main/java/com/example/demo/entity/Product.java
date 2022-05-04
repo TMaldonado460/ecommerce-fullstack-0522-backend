@@ -16,13 +16,14 @@ import java.util.UUID;
 @Entity
 @Table(name="product")
 public class Product {
-    // suerte facu
+    // suerte facu / finalizadas relaciones
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
-    )//TODO
+    )
+
     @Column(nullable = false)
     private UUID id;
     private String name;

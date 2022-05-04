@@ -21,8 +21,11 @@ import java.util.UUID;
 
 @Service
 public class UserInfoService {
+    // Constructors
     public UserInfoService() {
     }
+
+    // Dependency Injection
     final static Logger logger = LogManager.getLogger(UserInfoService.class);
     UserInfoRepository userInfoRepository;
 
@@ -31,6 +34,7 @@ public class UserInfoService {
     AdressRepository adressRepository;
 
     BillRepository billRepository;
+
     @Autowired
     public void setBillRepository(BillRepository billRepository) {
         this.billRepository = billRepository;
@@ -50,51 +54,61 @@ public class UserInfoService {
     public void setUserInfoRepository(UserInfoRepository userInfoRepository) {
         this.userInfoRepository = userInfoRepository;
     }
+
     private ObjectMapper mapper;
 
+    /* --------------------------------------------------------------------------------------- */
+    // CRUD
 
+    // Save
+    public UserInfoDTO createUserInfo(UserInfoDTO userInfoDTO) {
+        UserInfo userInfo = mapper.convertValue(userInfoDTO, UserInfo.class);
+        UserInfo userFound = userInfoRepository.save(userInfo);
+        return mapper.convertValue(userFound, UserInfoDTO.class);
+    }
+
+    // Find by id
     public Optional<UserInfo> getUserInfo(UUID userId) {
-        Optional<UserInfo> userInfo= userInfoRepository.findById(userId);
+        Optional<UserInfo> userInfo = userInfoRepository.findById(userId);
         UserInfoDTO userInfoDTO;
-        if(userInfo.isPresent()){
+        if (userInfo.isPresent()) {
             userInfoDTO = mapper.convertValue(userInfo, UserInfoDTO.class);
         }
         return userInfo;
     }
-    public UserInfoDTO createUserInfo(UserInfoDTO userInfoDTO) {
-        UserInfo userInfo=mapper.convertValue(userInfoDTO, UserInfo.class);
-        UserInfo userFound= userInfoRepository.save(userInfo);
-        return mapper.convertValue(userFound, UserInfoDTO.class);
-    }
+
+    // Find all
+
+    // Update
     public UserInfo updateUserInfo(UserInfo userInfo) {
         return userInfoRepository.save(userInfo);
     }
+
+    //Delete
     public void deleteUserInfo(UUID userId) {
         userInfoRepository.deleteById(userId);
     }
 
+    // OTHER
+
+    // Find by email
     public UserInfo getUserInfoByEmail(String email) {
         return userInfoRepository.findByEmail(email);
     }
+
     // que review hizo el usuario?
     public List<Review> getReviewsByUserId(UUID userId) {
-        return reviewRepository.findByUserInfoId(userId);
+        return reviewRepository.findAllByUserInfoId(userId);
     }
 
     //Direcciones del usuario
-    public Adress getAdressByUserId(UUID userId){
+    public Adress getAdressByUserId(UUID userId) {
         return adressRepository.findByUserInfoId(userId);
     }
 
-
     //Historial de compra del usuario
-    public List<Bill> getAllBillsByUserId(UUID userId){
+    public List<Bill> getAllBillsByUserId(UUID userId) {
         return billRepository.findAllByUserInfoId(userId);
     }
-
-
-
-
-
 
 }

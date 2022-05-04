@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 @Entity
 public class Bill {
-    //Hacer relacion @Many to many
+    //Hacer relacion @Many to many / finalizadas relaciones
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -39,9 +39,8 @@ public class Bill {
             inverseJoinColumns = @JoinColumn(name = "id_product"))
     private Set<Product> products;
 
-    //AGREGAR A LA BASE
+    //TODO AGREGAR A LA BASE
     private Date date;
-
 
 
 }

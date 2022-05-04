@@ -19,8 +19,6 @@ class ProyectoFullStackEcomerceApplicationTests {
 
 	@Test
 	void contextLoads() {
-
-
 	}
 
     @Test
