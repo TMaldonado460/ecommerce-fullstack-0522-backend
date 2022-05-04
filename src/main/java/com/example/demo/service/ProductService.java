@@ -12,8 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.PushBuilder;
 import java.util.*;
 
 @Service
@@ -75,6 +77,11 @@ public class ProductService {
 //        }
 //        return cart;
 //    }
+
+    public List<Product> searchByCategory(String category, Sort sort ){
+        List<Product> productList=productRepository.findByNameContainingOrderByPrice(category,sort);
+        return productList;
+    }
 
 
 

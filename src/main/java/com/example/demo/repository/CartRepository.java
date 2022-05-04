@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, UUID> {
-
+    //que onda esto?
+    @Query
+    public Cart findByUserInfoId(UUID userId);
 }
