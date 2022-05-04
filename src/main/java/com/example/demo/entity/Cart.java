@@ -28,13 +28,17 @@ public class Cart {
     @Column(nullable = false)
     private UUID id;
 
-    @ManyToMany
-    @JoinColumn(name="id_product",nullable = false)
-    private Set<Product> product=new HashSet<>();
-
     @OneToOne
     @JoinColumn(name="id_user_info",nullable = false)
     private UserInfo userInfo;
 
+    // Agrego la relación ManyToMany con la clase Product.
+    @ManyToMany
+    @JoinTable(
+            name = "cart_product",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> products = new HashSet<>();
 
 }

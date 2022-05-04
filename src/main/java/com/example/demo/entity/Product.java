@@ -37,7 +37,9 @@ public class Product {
     @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
     private List<Review> review;
 
-
+    // Agrego la relación "Many to Many" con clase Cart.
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.REMOVE)
+    private Set<Cart> carts;
 
     // Agrego la relación "Many to Many" con clase Bill.
     @ManyToMany(mappedBy = "products",cascade = CascadeType.REMOVE)

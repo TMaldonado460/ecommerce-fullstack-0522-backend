@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 @Data
 @AllArgsConstructor
@@ -28,15 +29,15 @@ public class UserInfo {
 
 
     @OneToMany(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
-    private Adress adress;
+    private Set<Adress> adressList;
 
     @OneToOne(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
     private Cart cart;
 
     //Agrego las relaciones de "One to Many" desde la clase UserInfo a las clases Review y Bill
     @OneToMany(mappedBy = "userInfo")
-    private Review review;
+    private Set<Review> reviewList;
 
     @OneToMany(mappedBy = "userInfo")
-    private Bill bill;
+    private Set<Bill> billList;
 }
