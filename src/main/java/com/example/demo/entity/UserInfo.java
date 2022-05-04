@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -14,7 +15,11 @@ import java.util.UUID;
 public class UserInfo {
     // suerte facu
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(nullable = false)
     private UUID id;
     private String email;
@@ -25,7 +30,7 @@ public class UserInfo {
     @OneToMany(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
     private Adress adress;
 
-    @OneToMany(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
     private Cart cart;
 
     //Agrego las relaciones de "One to Many" desde la clase UserInfo a las clases Review y Bill

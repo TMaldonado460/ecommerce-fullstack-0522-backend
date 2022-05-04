@@ -3,8 +3,10 @@ package com.example.demo.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,7 +18,11 @@ import java.util.UUID;
 public class Product {
     // suerte facu
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )//TODO
     @Column(nullable = false)
     private UUID id;
     private String name;
@@ -26,13 +32,12 @@ public class Product {
     private Float valoration;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
-    private Image image;
+    private List<Image> image;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
-    private Review review;
+    private List<Review> review;
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
-    private Cart cart;
+
 
     // Agrego la relación "Many to Many" con clase Bill.
     @ManyToMany(mappedBy = "products",cascade = CascadeType.REMOVE)

@@ -18,34 +18,34 @@ import java.util.*;
 
 @Service
 public class ProductService {
+
     public ProductService() {
     }
     final static Logger logger = LogManager.getLogger(ProductService.class);
-    ProductRepository productRepository;
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+
+
     private ObjectMapper mapper;
 
+    ProductRepository productRepository;
     ReviewRepository reviewRepository;
+    BillRepository billRepository;
+    CartRepository cartRepository;
     @Autowired
     public void setReviewRepository(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
-
-    BillRepository billRepository;
-
+    @Autowired
     public void setBillRepository(BillRepository billRepository) {
         this.billRepository = billRepository;
     }
-
-    CartRepository cartRepository;
-
+    @Autowired
     public void setCartRepository(CartRepository cartRepository) {
         this.cartRepository = cartRepository;
     }
-
+    @Autowired
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
     public Set<ProductDTO> searchALLProducts(){
         List<Product> productList=productRepository.findAll();
         Set<ProductDTO> productListDTO=new HashSet<>();
@@ -56,32 +56,31 @@ public class ProductService {
         return productListDTO;
     }
 
-    public Set<ReviewDTO> searchAllReviews(UUID productId) {
-        Optional<Product> product = productRepository.findById(productId);
-        List<Review> reviewList = reviewRepository.findAll();
-        Set<ReviewDTO> reviewListDTO = new HashSet<>();
-        if (product.isPresent()) {
-            for (Review review : reviewList) {
-                reviewListDTO.add(mapper.convertValue(review, ReviewDTO.class));
-            }
-        }
-        return reviewListDTO;
+//    public Set<ReviewDTO> searchAllReviews(UUID productId) {
+//        Optional<Product> product = productRepository.findById(productId);
+//        List<Review> reviewList = reviewRepository.findAll();
+//        Set<ReviewDTO> reviewListDTO = new HashSet<>();
+//        if (product.isPresent()) {
+//            for (Review review : reviewList) {
+//                reviewListDTO.add(mapper.convertValue(review, ReviewDTO.class));
+//            }
+//        }
+//        return reviewListDTO;
+//
+//    }
+//
+//
+//    public List<Product> addProductToCart(Product product,UUID productId){
+//        Optional<Product> productToSave = productRepository.findById(productId);
+//        List<Product> cart=new ArrayList<>();
+//        if(productToSave.isPresent()){
+//            cart.add(product);
+//        }
+//        return cart;
+//    }
 
-    }
 
 
-    public List<Product> addProductToCart(Product product,UUID productId){
-        Optional<Product> productToSave = productRepository.findById(productId);
-        List<Product> cart=new ArrayList<>();
-        if(productToSave.isPresent()){
-            cart.add(product);
-        }
-        return cart;
-
-
-
-
-    }
 
 
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -19,15 +20,19 @@ public class Cart {
 
     //Todas las relaciones hechas
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(nullable = false)
     private UUID id;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name="id_product",nullable = false)
     private Set<Product> product=new HashSet<>();
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="id_user_info",nullable = false)
     private UserInfo userInfo;
 
