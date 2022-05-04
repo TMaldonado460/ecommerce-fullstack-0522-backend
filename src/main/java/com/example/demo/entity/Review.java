@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -24,7 +25,6 @@ public class Review {
     @Column(nullable = false)
     private UUID id;
 
-
     @ManyToOne
     @JoinColumn(name="id_user_info",nullable = false)
     private UserInfo userInfo;
@@ -32,7 +32,6 @@ public class Review {
     @ManyToOne
     @JoinColumn(name="product",nullable = false)
     private Product product;
-
 
     private String comment;
 }

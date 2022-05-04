@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "user_info")
 public class UserInfo {
-    // suerte facu
+    // suerte facu / finalizadas relaciones
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -25,8 +26,6 @@ public class UserInfo {
     private UUID id;
     private String email;
     private String name;
-
-
 
     @OneToMany(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
     private Set<Adress> adressList;

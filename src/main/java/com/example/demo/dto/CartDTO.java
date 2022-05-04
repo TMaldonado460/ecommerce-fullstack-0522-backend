@@ -13,9 +13,6 @@ import java.util.UUID;
 @Setter
 
 public class CartDTO {
-
-    //Todas las relaciones hechas
-
     private UUID id;
 
 

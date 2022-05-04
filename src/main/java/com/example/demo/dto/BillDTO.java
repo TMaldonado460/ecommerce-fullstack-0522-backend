@@ -13,8 +13,6 @@ import java.util.UUID;
 @Setter
 
 public class BillDTO {
-    //Hacer relacion @Many to many
-
     private UUID id;
 
 

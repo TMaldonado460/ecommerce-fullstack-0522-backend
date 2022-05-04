@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class orderDTO {
-
     private String orderAttribute; // nombre por ej
     private Integer offset; // cantidad de elementos por pagina
     private String orderDirection; //asc o dsc
