@@ -55,32 +55,31 @@ public class ProductService {
         return productListDTO;
     }
 
-//    public Set<ReviewDTO> searchAllReviews(UUID productId) {
-//        Optional<Product> product = productRepository.findById(productId);
-//        List<Review> reviewList = reviewRepository.findAll();
-//        Set<ReviewDTO> reviewListDTO = new HashSet<>();
-//        if (product.isPresent()) {
-//            for (Review review : reviewList) {
-//                reviewListDTO.add(mapper.convertValue(review, ReviewDTO.class));
-//            }
-//        }
-//        return reviewListDTO;
-//
-//    }
-//
-//
-//    public List<Product> addProductToCart(Product product,UUID productId){
-//        Optional<Product> productToSave = productRepository.findById(productId);
-//        List<Product> cart=new ArrayList<>();
-//        if(productToSave.isPresent()){
-//            cart.add(product);
-//        }
-//        return cart;
-//    }
-
+    //Buscar categoría
     public List<Product> searchByCategory(String category, Sort sort ){
         List<Product> productList=productRepository.findByNameContainingOrderByPrice(category,sort);
         return productList;
+    }
+
+    //Buscar review por id del producto
+    public List<Review> findAllReviews(UUID productId){
+        List<Review> reviewList=reviewRepository.findAllByProduct_id(productId);
+        return reviewList;
+    }
+
+    // Buscar producto por id
+    public Product findById(UUID productId){
+        Optional<Product> product=productRepository.findById(productId);
+        return product.get();
+
+    }
+
+    public void deleteProduct(UUID productId){
+        productRepository.deleteById(productId);
+    }
+
+    public Product saveProduct(Product product){
+        return productRepository.save(product);
     }
 
 

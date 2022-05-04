@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,6 +38,10 @@ public class Bill {
             joinColumns = @JoinColumn(name = "id_bill"),
             inverseJoinColumns = @JoinColumn(name = "id_product"))
     private Set<Product> products;
+
+    //AGREGAR A LA BASE
+    private Date date;
+
 
 
 }

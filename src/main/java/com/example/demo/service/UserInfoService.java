@@ -2,9 +2,11 @@ package com.example.demo.service;
 
 import com.example.demo.dto.UserInfoDTO;
 import com.example.demo.entity.Adress;
+import com.example.demo.entity.Bill;
 import com.example.demo.entity.Review;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.AdressRepository;
+import com.example.demo.repository.BillRepository;
 import com.example.demo.repository.ReviewRepository;
 import com.example.demo.repository.UserInfoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +29,13 @@ public class UserInfoService {
     ReviewRepository reviewRepository;
 
     AdressRepository adressRepository;
+
+    BillRepository billRepository;
+    @Autowired
+    public void setBillRepository(BillRepository billRepository) {
+        this.billRepository = billRepository;
+    }
+
     @Autowired
     public void setAdressRepository(AdressRepository adressRepository) {
         this.adressRepository = adressRepository;
@@ -71,9 +80,18 @@ public class UserInfoService {
     public List<Review> getReviewsByUserId(UUID userId) {
         return reviewRepository.findByUserInfoId(userId);
     }
+
+    //Direcciones del usuario
     public Adress getAdressByUserId(UUID userId){
         return adressRepository.findByUserInfoId(userId);
     }
+
+
+    //Historial de compra del usuario
+    public List<Bill> getAllBillsByUserId(UUID userId){
+        return billRepository.findAllByUserInfoId(userId);
+    }
+
 
 
 
