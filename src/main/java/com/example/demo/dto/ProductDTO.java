@@ -16,9 +16,13 @@ public class ProductDTO {
     private UUID id;
     private String name;
     private Double price;
-    private Integer stock;
+    private Integer stock; // esto no se va a mandar a la vista
     private String property;
     private Float valoration;
+
+    // array de imagenes falta
+    // lo ideal seria tener 2 dto de producto, despues les comento como funcionaria, de momento el productDTO
+    // solo tiene una imagen -- Tomi
 
 
 
