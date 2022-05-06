@@ -18,7 +18,7 @@ public class ProductDTO {
     private String name;
     private Double price;
     // private Integer stock; // esto no se va a mandar a la vista
-    private String property;
+    private String property; //sirve que esto este en el dto?
     private Float valoration;
     private Set<ReviewDTO> reviews;
     private Set<ImageDTO> images;

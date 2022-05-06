@@ -1,12 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ArrayProductDTO;
+import com.example.demo.dto.ProductDTO;
+import com.example.demo.entity.Image;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.Review;
-import com.example.demo.repository.BillRepository;
-import com.example.demo.repository.CartRepository;
-import com.example.demo.repository.ProductRepository;
-import com.example.demo.repository.ReviewRepository;
+import com.example.demo.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +26,8 @@ public class ProductService {
     ReviewRepository reviewRepository;
     BillRepository billRepository;
     CartRepository cartRepository;
+
+    ImageRepository imageRepository;
     @Autowired
     public void setReviewRepository(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
@@ -60,25 +61,36 @@ public class ProductService {
     }
 
     //Buscar review por id del producto
-    public List<Review> findAllReviews(UUID productId){
-        List<Review> reviewList=reviewRepository.findAllByProduct_id(productId);
+    public List<Review> findAllReviews(UUID product_id){
+        List<Review> reviewList=reviewRepository.findAllByProduct_id(product_id);
         return reviewList;
+    }
+    public List<Image> findAllImages(UUID product_id){
+        List<Image> imageList= imageRepository.findAllByProduct_id(product_id);
+        return imageList;
     }
 
     // Buscar producto por id
-    public Product findById(UUID productId){
+    public ProductDTO findById(UUID productId){
         Optional<Product> product=productRepository.findById(productId);
-        return product.get();
+        ProductDTO productDTO=null;
+        if(product.isPresent()){
+            productDTO=mapper.convertValue(product.get(), ProductDTO.class);
+        }
+        return productDTO;
 
     }
+
+
 
     public void deleteProduct(UUID productId){
         productRepository.deleteById(productId);
     }
 
-    public Product saveProduct(Product product){
-        return productRepository.save(product);
+    public List<Product> saveAllProducts(List<Product> product){
+        return productRepository.saveAll(product);
     }
+
 
 
 

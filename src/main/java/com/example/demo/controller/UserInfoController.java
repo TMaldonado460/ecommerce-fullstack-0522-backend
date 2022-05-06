@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @RestController @RequestMapping("user_info")
 public class UserInfoController {
+
     @Autowired
     private UserInfoService userInfoService;
     @PostMapping()
