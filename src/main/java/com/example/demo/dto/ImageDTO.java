@@ -17,6 +17,7 @@ public class ImageDTO {
 
     private UUID id;
     private String url;
+    private Integer type; // 1 miniatura, 2 imagen grande, 3 imagen pequeña (miniatura es una imagen pequeña)
 
 
 

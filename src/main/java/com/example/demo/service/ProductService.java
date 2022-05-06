@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.ProductDTO;
-import com.example.demo.dto.ReviewDTO;
+import com.example.demo.dto.ArrayProductDTO;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.Review;
 import com.example.demo.repository.BillRepository;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.PushBuilder;
 import java.util.*;
 
 @Service
@@ -45,11 +43,11 @@ public class ProductService {
     public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-    public Set<ProductDTO> searchALLProducts(){
+    public Set<ArrayProductDTO> searchALLProducts(){
         List<Product> productList=productRepository.findAll();
-        Set<ProductDTO> productListDTO=new HashSet<>();
+        Set<ArrayProductDTO> productListDTO=new HashSet<>();
         for (Product product:productList) {
-            productListDTO.add(mapper.convertValue(product,ProductDTO.class));
+            productListDTO.add(mapper.convertValue(product, ArrayProductDTO.class));
 
         }
         return productListDTO;

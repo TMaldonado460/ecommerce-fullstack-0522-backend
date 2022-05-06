@@ -29,5 +29,7 @@ public class Image {
     @JoinColumn(name="id_product",nullable = false)
     private Product product;
 
+    private Integer type; // 1 miniatura, 2 imagen grande, 3 imagen pequeña (miniatura es una imagen pequeña)
+
 
 }
