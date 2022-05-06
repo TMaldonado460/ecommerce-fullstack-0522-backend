@@ -18,8 +18,8 @@ public class UserInfoController {
     public UserInfoDTO createUserInfo(@RequestBody UserInfoDTO userInfo) {
         return userInfoService.createUserInfo(userInfo);
     }
-    @GetMapping("{id}")
-    public Optional<UserInfo> getUserInfo(@RequestParam UUID id) {
-        return userInfoService.getUserInfo(id);
-    }
+//    @GetMapping("{id}")
+//    public Optional<UserInfo> getUserInfo(@RequestParam UUID id) {
+//        return userInfoService.getUserInfo(id);
+//    }
 }

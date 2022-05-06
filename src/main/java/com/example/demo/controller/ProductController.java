@@ -39,10 +39,10 @@ public class ProductController {
         return productService.findById(id);
     }
     // /api/v1/products post (@RequestBody List<ProductDTO> productsToInsert)
-    @PostMapping("/api/v1/products")
-    public List<Product> createProducts(@RequestBody List<Product> productsToInsert) {
-        return productService.saveAllProducts(productsToInsert);
-    }
+//    @PostMapping("/api/v1/products")
+//    public List<ProductDTO> createProducts(@RequestBody List<ProductDTO> productsToInsert) {
+//        return productService.saveAllProducts(productsToInsert);
+//    }
 
 
 

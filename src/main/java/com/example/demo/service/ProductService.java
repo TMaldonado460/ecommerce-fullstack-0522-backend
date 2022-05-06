@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ArrayProductDTO;
+import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.Image;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.Review;
 import com.example.demo.repository.*;
+import com.example.demo.util.MapperUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
+
+import static com.example.demo.util.MapperUtil.mapList;
 
 @Service
 public class ProductService {
@@ -21,6 +26,8 @@ public class ProductService {
     public ProductService() {
     }
     final static Logger logger = LogManager.getLogger(ProductService.class);
+    @Autowired
+    MapperUtil mapList;
     private ObjectMapper mapper;
     ProductRepository productRepository;
     ReviewRepository reviewRepository;
@@ -65,9 +72,13 @@ public class ProductService {
         List<Review> reviewList=reviewRepository.findAllByProduct_id(product_id);
         return reviewList;
     }
-    public List<Image> findAllImages(UUID product_id){
-        List<Image> imageList= imageRepository.findAllByProduct_id(product_id);
-        return imageList;
+    public List<ImageDTO> findAllImages(UUID product_id){
+        List<Image> imageList=imageRepository.findAllByProduct_id(product_id);
+        List<ImageDTO> imageDTOList=new ArrayList<>();
+        for (Image image:imageList) {
+            imageDTOList.add(mapper.convertValue(image, ImageDTO.class));
+        }
+        return imageDTOList;
     }
 
     // Buscar producto por id
@@ -86,10 +97,20 @@ public class ProductService {
     public void deleteProduct(UUID productId){
         productRepository.deleteById(productId);
     }
-
-    public List<Product> saveAllProducts(List<Product> product){
-        return productRepository.saveAll(product);
+    @Transactional //Esto sirve para que no guarde si no está todo bien. Sin esto, guarda algunos.Preferis que te guarde nada en vez de incompleto
+    public List<ProductDTO> saveAllProducts(List<ProductDTO> productsDTO){
+        List<Product> productList = mapList(productsDTO,Product.class);
+        List<Product> productListSaved=productRepository.saveAll(productList);
+        List<ProductDTO> productListDTO=new ArrayList<>();
+        for (Product product1:productList) {
+            productListDTO.add(mapper.convertValue(productListSaved, ProductDTO.class));
+        }
+        return productListDTO;
     }
+
+//    Paciente paciente= mapper.convertValue(pacienteDTO,Paciente.class);
+//    Paciente pacienteGuardado=pacienteRepository.save(paciente);
+//        return mapper.convertValue(pacienteGuardado,PacienteDTO.class);
 
 
 

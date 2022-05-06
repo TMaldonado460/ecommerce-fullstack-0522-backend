@@ -53,13 +53,13 @@ public class UserInfoService {
     private ObjectMapper mapper;
 
 
-    public Optional<UserInfo> getUserInfo(UUID userId) {
+    public UserInfoDTO getUserInfo(UUID userId) {
         Optional<UserInfo> userInfo= userInfoRepository.findById(userId);
-        UserInfoDTO userInfoDTO;
+        UserInfoDTO userInfoDTO = null;
         if(userInfo.isPresent()){
             userInfoDTO = mapper.convertValue(userInfo, UserInfoDTO.class);
         }
-        return userInfo;
+        return userInfoDTO;
     }
     public UserInfoDTO createUserInfo(UserInfoDTO userInfoDTO) {
         UserInfo userInfo=mapper.convertValue(userInfoDTO, UserInfo.class);
