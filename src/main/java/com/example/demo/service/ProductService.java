@@ -91,13 +91,10 @@ public class ProductService {
         return productDTO;
 
     }
-
-
-
     public void deleteProduct(UUID productId){
         productRepository.deleteById(productId);
     }
-    @Transactional //Esto sirve para que no guarde si no está todo bien. Sin esto, guarda algunos.Preferis que te guarde nada en vez de incompleto
+    @Transactional //Esto sirve para que no guarde si no está todo bien. Sin esto, guarda algunos.Preferis que NO te guarde nada en vez de incompleto
     public List<ProductDTO> saveAllProducts(List<ProductDTO> productsDTO){
         List<Product> productList = mapList(productsDTO,Product.class);
         List<Product> productListSaved=productRepository.saveAll(productList);
@@ -108,9 +105,9 @@ public class ProductService {
         return productListDTO;
     }
 
-//    Paciente paciente= mapper.convertValue(pacienteDTO,Paciente.class);
-//    Paciente pacienteGuardado=pacienteRepository.save(paciente);
-//        return mapper.convertValue(pacienteGuardado,PacienteDTO.class);
+
+
+
 
 
 

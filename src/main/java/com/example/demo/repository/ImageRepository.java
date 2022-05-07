@@ -12,10 +12,10 @@ import java.util.UUID;
 public interface ImageRepository extends JpaRepository<Image, UUID> {
     @Query
     List<Image> findAllByProduct_id(UUID product_id);
-
-    @Query
-    List<Image> findByProduct_id(UUID id);
-    //buscar imagen donde usuario id donde where type=1
+//
 //    @Query
-//    Image findByProduct_idAndTypeIs1(UUID id);
+//    List<Image> findByProduct_id(UUID id);
+//    //buscar imagen donde usuario id donde where type=1
+//    @Query
+//    Image findByProduct_idWhereTypeIs1(UUID id);
 }
