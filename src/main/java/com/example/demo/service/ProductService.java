@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -65,8 +67,24 @@ public class ProductService {
 
     //Buscar categoría
     public List<Product> searchByCategory(String category, Sort sort ){
-        List<Product> productList=productRepository.findByNameContainingOrderByPrice(category,sort);
-        return productList;
+        //List<Product> productList=productRepository.findByNameContainingOrderByPrice(category,sort);
+        return null;
+    }
+
+    public List<ArrayProductDTO> findAllProducts(Pageable pageable) {
+        Page<Product> productPage = productRepository.findAll(pageable);
+        List<ArrayProductDTO> productDTOList = new ArrayList<>();
+        for (Product product : productPage) {
+            ArrayProductDTO productDTO = mapper.convertValue(product, ArrayProductDTO.class);
+            Optional<Image> image = imageRepository.findTopByProduct_Id(product.getId());
+            if (image.isPresent()) {
+                productDTO.setImage(mapper.convertValue(image.get(), ImageDTO.class));
+            }
+            productDTOList.add(productDTO);
+        }
+
+
+        return productDTOList;
     }
 
     //Buscar review por id del producto
