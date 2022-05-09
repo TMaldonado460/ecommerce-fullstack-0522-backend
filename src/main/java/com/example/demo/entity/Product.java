@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,15 +28,22 @@ public class Product {
     private UUID id;
     private String name;
     private Double price;
-    private Integer stock;
     private String property;
     private Float valoration;
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
-    private List<Image> image;
+    // varchar 500
+    @Column(length = 2000)
+    private String description;
+
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
-    private List<Review> review;
+    private List<Image> images;
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
+    private List<Stock> stock;
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
+    private List<Review> reviews;
 
     // Agrego la relación "Many to Many" con clase Cart.
     @ManyToMany(mappedBy = "products", cascade = CascadeType.REMOVE)

@@ -1,5 +1,6 @@
 package com.example.demo.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 @Component //siempre poner esto en elementos del util o se rompe tuto el proyecto
 public class MapperUtil {
 
-    private static ModelMapper modelMapper = new ModelMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
 
 
     private MapperUtil() {
@@ -22,7 +23,7 @@ public class MapperUtil {
 
         return source
                 .stream()
-                .map(element -> modelMapper.map(element, targetClass))
+                .map(element -> mapper.convertValue(element, targetClass))
                 .collect(Collectors.toList());
     }
 }

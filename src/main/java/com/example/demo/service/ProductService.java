@@ -26,8 +26,6 @@ public class ProductService {
     public ProductService() {
     }
     final static Logger logger = LogManager.getLogger(ProductService.class);
-    @Autowired
-    MapperUtil mapList;
     private ObjectMapper mapper;
     ProductRepository productRepository;
     ReviewRepository reviewRepository;
@@ -55,8 +53,12 @@ public class ProductService {
         List<Product> productList=productRepository.findAll();
         Set<ArrayProductDTO> productListDTO=new HashSet<>();
         for (Product product:productList) {
-            productListDTO.add(mapper.convertValue(product, ArrayProductDTO.class));
-
+            ArrayProductDTO productDTO=mapper.convertValue(product, ArrayProductDTO.class);
+            Optional<Image> image = imageRepository.findTopByProduct_Id(product.getId());
+            if (image.isPresent()) {
+                productDTO.setImage(mapper.convertValue(image.get(), ImageDTO.class));
+            }
+            productListDTO.add(productDTO);
         }
         return productListDTO;
     }
@@ -96,12 +98,9 @@ public class ProductService {
     }
     @Transactional //Esto sirve para que no guarde si no está todo bien. Sin esto, guarda algunos.Preferis que NO te guarde nada en vez de incompleto
     public List<ProductDTO> saveAllProducts(List<ProductDTO> productsDTO){
-        List<Product> productList = mapList(productsDTO,Product.class);
+        List<Product> productList = MapperUtil.mapList(productsDTO,Product.class);
         List<Product> productListSaved=productRepository.saveAll(productList);
-        List<ProductDTO> productListDTO=new ArrayList<>();
-        for (Product product1:productList) {
-            productListDTO.add(mapper.convertValue(productListSaved, ProductDTO.class));
-        }
+        List<ProductDTO> productListDTO = MapperUtil.mapList(productListSaved,ProductDTO.class);
         return productListDTO;
     }
 

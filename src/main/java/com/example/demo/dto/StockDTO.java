@@ -8,18 +8,14 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-
-
-public class ImageDTO {
-    //relaciones hechas
-
+public class StockDTO {
     private UUID id;
-    private String urlMiniature;
-    private String urlFull;
-
+    private Integer quantity;
+    private String size;
 }

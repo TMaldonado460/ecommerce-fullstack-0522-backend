@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 
 public class ProductDTO {
     private UUID id;
@@ -22,4 +25,7 @@ public class ProductDTO {
     private Float valoration;
     private Set<ReviewDTO> reviews;
     private Set<ImageDTO> images;
+    private Set<StockDTO> stock;
+
+    private String description;
 }

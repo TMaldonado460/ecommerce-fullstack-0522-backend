@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 
 public class ArrayProductDTO {
     // suerte facu
@@ -20,7 +23,7 @@ public class ArrayProductDTO {
     // private Integer stock; // esto no se va a mandar a la vista
     private String property;
     private Float valoration;
-    private String image;// esto se coloca con un setter en la capa service
+    private ImageDTO image;// esto se coloca con un setter en la capa service
 
     // array de imagenes falta
     // lo ideal seria tener 2 dto de producto, despues les comento como funcionaria, de momento el productDTO

@@ -9,27 +9,26 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.UUID;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-public class Image {
-    //relaciones hechas
+public class Stock {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
-    )
+    )//TODO
     @Column(nullable = false)
     private UUID id;
-    private String urlMiniature;
-    private String urlFull;
+    private Integer quantity;
+    private String size;
+
+
     @ManyToOne
-    @JoinColumn(name="id_product",nullable = false)
+
     private Product product;
-
-
-
 }
