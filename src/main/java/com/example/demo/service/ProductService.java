@@ -71,8 +71,8 @@ public class ProductService {
         return null;
     }
 
-    public List<ArrayProductDTO> findAllProducts(Pageable pageable) {
-        Page<Product> productPage = productRepository.findAll(pageable);
+    public List<ArrayProductDTO> findAllProducts(String property,Pageable pageable) {
+        Page<Product> productPage = productRepository.findByPropertyContaining(property,pageable);
         List<ArrayProductDTO> productDTOList = new ArrayList<>();
         for (Product product : productPage) {
             ArrayProductDTO productDTO = mapper.convertValue(product, ArrayProductDTO.class);
@@ -122,7 +122,16 @@ public class ProductService {
         return productListDTO;
     }
 
+    public long getNumberOfProducts(String property){
+        if(property==null){
+            return productRepository.count();
+        }
+        return productRepository.count();
+    }
 
+    public long countByProperty(String property){
+        return productRepository.countByProperty(property);
+    }
 
 
 

@@ -29,6 +29,5 @@ public class Stock {
 
 
     @ManyToOne
-
     private Product product;
 }

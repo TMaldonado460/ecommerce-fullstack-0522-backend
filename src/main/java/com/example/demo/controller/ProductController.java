@@ -31,7 +31,7 @@ public class ProductController {
             @RequestParam(required = false) String attribute,
             @RequestParam(required = false) String order,
             @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) Integer limit) {
+            @RequestParam(required = false) Integer limit,@RequestParam String property) {
 
         if (attribute == null) {
             attribute = "id";
@@ -45,12 +45,15 @@ public class ProductController {
         if (limit == null) {
             limit = 10;
         }
+        if (property == null) {
+            property = "";
+        }
 
         if (order.equals("asc")) {
-            return productService.findAllProducts(PageRequest.of(page, limit, Sort.by(Sort.Direction.ASC, attribute)));
+            return productService.findAllProducts(property,PageRequest.of(page, limit, Sort.by(Sort.Direction.ASC, attribute)));
         }
         else {
-            return productService.findAllProducts(PageRequest.of(page, limit, Sort.by(Sort.Direction.DESC, attribute)));
+            return productService.findAllProducts(property,PageRequest.of(page, limit, Sort.by(Sort.Direction.DESC, attribute)));
         }
     }
 //    /api/v1/products (@RequestParam(required = false) String attribute, @RequestParam(required = false) String order, @RequestParam(required = false) Integer offset)
@@ -62,13 +65,19 @@ public class ProductController {
 //            * En el service se va a tener que hacer algo por cada producto (buscar la imagen que corresponde a la miniatura e insertarla en cada uno)
 //    * Hacer un switch en relacion a posibles valores de los requestParams? no es necesario, fijarse cual es mejor
 
-
-
     @PostMapping("/api/v1/products")
     public List<ProductDTO> createProducts(@RequestBody List<ProductDTO> productsToInsert) {
         return productService.saveAllProducts(productsToInsert);
     }
 
+
+    @GetMapping("/")
+    public Long getTotalProducts(@RequestParam(required = false) String property) {
+        if (property == null) {
+            property = "";
+        }
+        return productService.countByProperty(property);
+    }
 
 
 
