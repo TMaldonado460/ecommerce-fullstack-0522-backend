@@ -10,13 +10,14 @@ import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@RestController @RequestMapping("/api/v1/products")
+@RestController @RequestMapping("api/v1/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -26,12 +27,12 @@ public class ProductController {
         return productService.findById(id);
     }
     // /api/v1/products post (@RequestBody List<ProductDTO> productsToInsert)
-    @GetMapping("/")
-    public List<ArrayProductDTO> getAllProducts(
+    @GetMapping("")
+    public ResponseEntity<List<ArrayProductDTO>> getAll(
             @RequestParam(required = false) String attribute,
             @RequestParam(required = false) String order,
             @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) Integer limit,@RequestParam String property) {
+            @RequestParam(required = false) Integer limit,@RequestParam(required = false) String property) {
 
         if (attribute == null) {
             attribute = "id";
@@ -49,12 +50,15 @@ public class ProductController {
             property = "";
         }
 
+        List<ArrayProductDTO> response = new ArrayList<>();
         if (order.equals("asc")) {
-            return productService.findAllProducts(property,PageRequest.of(page, limit, Sort.by(Sort.Direction.ASC, attribute)));
+            response = productService.findAllProducts(property,PageRequest.of(page, limit, Sort.by(Sort.Direction.ASC, attribute)));
         }
         else {
-            return productService.findAllProducts(property,PageRequest.of(page, limit, Sort.by(Sort.Direction.DESC, attribute)));
+            response = productService.findAllProducts(property,PageRequest.of(page, limit, Sort.by(Sort.Direction.DESC, attribute)));
         }
+
+        return ResponseEntity.ok(response);
     }
 //    /api/v1/products (@RequestParam(required = false) String attribute, @RequestParam(required = false) String order, @RequestParam(required = false) Integer offset)
 //    ex: /api/v1/products?attribute=name&order=desc&page=2&limit=25
@@ -65,13 +69,13 @@ public class ProductController {
 //            * En el service se va a tener que hacer algo por cada producto (buscar la imagen que corresponde a la miniatura e insertarla en cada uno)
 //    * Hacer un switch en relacion a posibles valores de los requestParams? no es necesario, fijarse cual es mejor
 
-    @PostMapping("/api/v1/products")
+    @PostMapping("")
     public List<ProductDTO> createProducts(@RequestBody List<ProductDTO> productsToInsert) {
         return productService.saveAllProducts(productsToInsert);
     }
 
 
-    @GetMapping("/")
+    @GetMapping("/count")
     public Long getTotalProducts(@RequestParam(required = false) String property) {
         if (property == null) {
             property = "";
