@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.security.entity.UserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

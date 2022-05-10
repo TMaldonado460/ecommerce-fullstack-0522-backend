@@ -31,6 +31,7 @@ public class UserInfo implements UserDetails {
     private UUID id;
     private String username;
     private String password;
+    private String email;
     /*
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "paciente_id")

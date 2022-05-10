@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Component //siempre poner esto en elementos del util o se rompe tuto el proyecto
 public class MapperUtil {
+    // macunfla de la clase oasdkadsk asdasd asdasd
 
     private static ObjectMapper mapper = new ObjectMapper();
 

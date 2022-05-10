@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.security.entity.UserInfo;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

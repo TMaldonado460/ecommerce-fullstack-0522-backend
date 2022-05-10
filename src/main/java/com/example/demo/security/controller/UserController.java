@@ -1,8 +1,10 @@
 package com.example.demo.security.controller;
 
 
+import com.example.demo.dto.UserInfoDTO;
 import com.example.demo.security.UserDetailsServiceImpl;
 import com.example.demo.security.components.JwtUtil;
+import com.example.demo.security.entity.UserInfo;
 import com.example.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +12,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Map;
 
@@ -28,6 +33,7 @@ public class UserController {
     private JwtUtil jwtUtil;
     @Autowired
     private UserInfoService userInfoService;
+
 
     @PostMapping("/signin")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody Map<String, String> loginRequest) throws Exception {
@@ -67,6 +73,27 @@ public class UserController {
             return authorities;
         }
     }
+    //Registrar
+
+    @GetMapping("/registrer")
+    public ResponseEntity<?> registrer(Model model) {
+        return (ResponseEntity<?>) model.addAttribute("user", new UserInfoDTO());
+    }
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @ModelAttribute UserInfo userInfo, BindingResult result,Model model) {
+        if(result.hasErrors()) {
+            return ResponseEntity.badRequest().body(result.getAllErrors());
+        }else {
+            model.addAttribute("user", userInfoService.registrer(userInfo));
+        }
+        return ResponseEntity.ok("registro exitoso");
+    }
+
+    //Login
+    //acceder a atributos propios del usuario(review, carrito, etc)
+    //problemas posibles:recuperar usario e id
+
+
 }
 
 

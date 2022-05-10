@@ -34,6 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
             .authorizeRequests()
+                //macunflagını kullanıcıya açık olsun
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
@@ -41,8 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v3/api-docs").permitAll()
                 .antMatchers("/users/signin").permitAll()
                 .antMatchers("/api/v1/products/**").permitAll()
+                //si quiero cambiar .hasAutority
                 .anyRequest().hasAuthority(UserRoles.ROLE_USER.name())
             .and()
+                //macunfla
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

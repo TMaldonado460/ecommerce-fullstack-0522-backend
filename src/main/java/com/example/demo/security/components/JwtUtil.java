@@ -42,6 +42,7 @@ public class JwtUtil {
 
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+                //aca definimos el tiempo de expiracion del token
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(io.jsonwebtoken.SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }

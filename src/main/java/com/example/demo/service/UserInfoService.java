@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,12 @@ public class UserInfoService {
     AdressRepository adressRepository;
 
     BillRepository billRepository;
+
+    @Autowired
+    private static BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+
     @Autowired
     public void setBillRepository(BillRepository billRepository) {
         this.billRepository = billRepository;
@@ -53,46 +60,54 @@ public class UserInfoService {
     private ObjectMapper mapper;
 
 
-    public UserInfoDTO getUserInfo(UUID userId) {
-        Optional<UserInfo> userInfo= userInfoRepository.findById(userId);
-        UserInfoDTO userInfoDTO = null;
-        if(userInfo.isPresent()){
-            userInfoDTO = mapper.convertValue(userInfo, UserInfoDTO.class);
-        }
-        return userInfoDTO;
-    }
-    public UserInfoDTO createUserInfo(UserInfoDTO userInfoDTO) {
-        UserInfo userInfo=mapper.convertValue(userInfoDTO, UserInfo.class);
-        UserInfo userFound= userInfoRepository.save(userInfo);
-        return mapper.convertValue(userFound, UserInfoDTO.class);
-    }
-    public UserInfo updateUserInfo(UserInfo userInfo) {
-        return userInfoRepository.save(userInfo);
-    }
-    public void deleteUserInfo(UUID userId) {
-        userInfoRepository.deleteById(userId);
+//    public UserInfoDTO getUserInfo(UUID userId) {
+//        Optional<UserInfo> userInfo= userInfoRepository.findById(userId);
+//        UserInfoDTO userInfoDTO = null;
+//        if(userInfo.isPresent()){
+//            userInfoDTO = mapper.convertValue(userInfo, UserInfoDTO.class);
+//        }
+//        return userInfoDTO;
+//    }
+//    public UserInfoDTO createUserInfo(UserInfoDTO userInfoDTO) {
+//        UserInfo userInfo=mapper.convertValue(userInfoDTO, UserInfo.class);
+//        UserInfo userFound= userInfoRepository.save(userInfo);
+//        return mapper.convertValue(userFound, UserInfoDTO.class);
+//    }
+//    public UserInfo updateUserInfo(UserInfo userInfo) {
+//        return userInfoRepository.save(userInfo);
+//    }
+//    public void deleteUserInfo(UUID userId) {
+//        userInfoRepository.deleteById(userId);
+//    }
+//
+//    public UserInfo getUserInfoByEmail(String email) {
+//        return userInfoRepository.findByEmail(email);
+//    }
+//    // que review hizo el usuario?
+//    public List<Review> getReviewsByUserId(UUID userId) {
+//        return reviewRepository.findByUserInfoId(userId);
+//    }
+//
+//    //Direcciones del usuario
+//    public Adress getAdressByUserId(UUID userId){
+//        return adressRepository.findByUserInfoId(userId);
+//    }
+//
+//
+//    //Historial de compra del usuario
+//    public List<Bill> getAllBillsByUserId(UUID userId){
+//        return billRepository.findAllByUserInfoId(userId);
+//    }
+
+    public Object registrer(UserInfo u) {
+        u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
+        return userInfoRepository.save(u);
     }
 
-    public UserInfo getUserInfoByEmail(String email) {
-        return userInfoRepository.findByEmail(email);
-    }
-    // que review hizo el usuario?
-    public List<Review> getReviewsByUserId(UUID userId) {
-        return reviewRepository.findByUserInfoId(userId);
-    }
-
-    //Direcciones del usuario
-    public Adress getAdressByUserId(UUID userId){
-        return adressRepository.findByUserInfoId(userId);
-    }
-
-
-    //Historial de compra del usuario
-    public List<Bill> getAllBillsByUserId(UUID userId){
-        return billRepository.findAllByUserInfoId(userId);
-    }
-
-
+    //los metodos static:
+    //todas las instancias ocupan el mismo espacio de memoria
+    //se instancia una vez y no se puede tocar
+    //por eso no se puede extender
 
 
 
