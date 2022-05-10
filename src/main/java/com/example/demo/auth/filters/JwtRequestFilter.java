@@ -2,7 +2,7 @@ package com.example.demo.auth.filters;
 
 import com.example.demo.security.UserDetailsServiceImpl;
 import com.example.demo.security.components.JwtUtil;
-import com.example.demo.security.entity.Usuario;
+import com.example.demo.security.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,7 +35,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            Usuario userDetails = (Usuario) userDetailsService.loadUserByUsername(username);
+            UserInfo userDetails = (UserInfo) userDetailsService.loadUserByUsername(username);
             if (jwtUtil.validateToken(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));

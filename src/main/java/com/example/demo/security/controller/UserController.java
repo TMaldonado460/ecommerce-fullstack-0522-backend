@@ -3,6 +3,7 @@ package com.example.demo.security.controller;
 
 import com.example.demo.security.UserDetailsServiceImpl;
 import com.example.demo.security.components.JwtUtil;
+import com.example.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,8 @@ public class UserController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private UserInfoService userInfoService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody Map<String, String> loginRequest) throws Exception {

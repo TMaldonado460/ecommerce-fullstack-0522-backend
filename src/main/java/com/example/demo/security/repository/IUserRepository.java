@@ -1,6 +1,6 @@
 package com.example.demo.security.repository;
 
-import com.example.demo.security.entity.Usuario;
+import com.example.demo.security.entity.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,9 +11,13 @@ import java.util.UUID;
 
 @Repository
 @Transactional
-public interface IUserRepository extends JpaRepository<Usuario, UUID> {
+public interface IUserRepository extends JpaRepository<UserInfo, UUID> {
     @Query
-    Optional<Usuario> findByUsername(String username);
+    Optional<UserInfo> findByUsername(String username);
 
-    Optional<Usuario> findByUsernameAndPassword(String username, String password);
+    Optional<UserInfo> findByUsernameAndPassword(String username, String password);
+
+
+    @Query
+    UserInfo findByEmail(String email);
 }

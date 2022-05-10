@@ -1,24 +1,14 @@
 package com.example.demo;
 
-import com.example.demo.dto.ImageDTO;
-import com.example.demo.dto.ProductDTO;
-import com.example.demo.dto.StockDTO;
-import com.example.demo.entity.Image;
 import com.example.demo.repository.BillRepository;
 import com.example.demo.repository.ImageRepository;
 import com.example.demo.repository.ProductRepository;
-import com.example.demo.repository.UserInfoRepository;
 import com.example.demo.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Sort;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 @SpringBootTest
 class ProyectoFullStackEcomerceApplicationTests {

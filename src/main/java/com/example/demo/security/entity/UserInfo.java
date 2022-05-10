@@ -1,5 +1,9 @@
 package com.example.demo.security.entity;
 
+import com.example.demo.entity.Adress;
+import com.example.demo.entity.Bill;
+import com.example.demo.entity.Cart;
+import com.example.demo.entity.Review;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -16,7 +21,7 @@ import java.util.UUID;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Builder
-public class Usuario implements UserDetails {
+public class UserInfo implements UserDetails {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -40,6 +45,18 @@ public class Usuario implements UserDetails {
         System.out.println("auth: " + grantedAuthority);
         return Collections.singletonList(grantedAuthority);
     }
+    @OneToMany(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
+    private Set<Adress> adressList;
+
+    @OneToOne(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
+    private Cart cart;
+
+    //Agrego las relaciones de "One to Many" desde la clase UserInfo a las clases Review y Bill
+    @OneToMany(mappedBy = "userInfo")
+    private Set<Review> reviewList;
+
+    @OneToMany(mappedBy = "userInfo")
+    private Set<Bill> billList;
 
     @Override
     public boolean isAccountNonExpired() {

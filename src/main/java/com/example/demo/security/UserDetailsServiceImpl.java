@@ -1,6 +1,6 @@
 package com.example.demo.security;
 
-import com.example.demo.security.entity.Usuario;
+import com.example.demo.security.entity.UserInfo;
 import com.example.demo.security.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Usuario> usuario = userRepository.findByUsername(username);
+        Optional<UserInfo> usuario = userRepository.findByUsername(username);
         if (usuario.isPresent()) {
             return (UserDetails) usuario.get();
         }

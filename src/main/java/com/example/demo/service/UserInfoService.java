@@ -4,11 +4,11 @@ import com.example.demo.dto.UserInfoDTO;
 import com.example.demo.entity.Adress;
 import com.example.demo.entity.Bill;
 import com.example.demo.entity.Review;
-import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.AdressRepository;
 import com.example.demo.repository.BillRepository;
 import com.example.demo.repository.ReviewRepository;
-import com.example.demo.repository.UserInfoRepository;
+import com.example.demo.security.entity.UserInfo;
+import com.example.demo.security.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +24,7 @@ public class UserInfoService {
     public UserInfoService() {
     }
     final static Logger logger = LogManager.getLogger(UserInfoService.class);
-    UserInfoRepository userInfoRepository;
+    IUserRepository userInfoRepository;
 
     ReviewRepository reviewRepository;
 
@@ -47,7 +47,7 @@ public class UserInfoService {
     }
 
     @Autowired
-    public void setUserInfoRepository(UserInfoRepository userInfoRepository) {
+    public void setUserInfoRepository(IUserRepository userInfoRepository) {
         this.userInfoRepository = userInfoRepository;
     }
     private ObjectMapper mapper;
