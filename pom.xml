@@ -103,26 +103,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/classes/resources</outputDirectory>
-							<resources>
-								<resource>
-									<directory>..\..\frontend\ecommerce-fullstack-0522-frontend\ecommerce-front</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 
 	</build>
