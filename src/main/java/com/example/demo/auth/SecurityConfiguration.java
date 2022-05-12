@@ -40,12 +40,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-ui/**", "/v3/api-docs/swagger-config*").permitAll()
                 .antMatchers("/v3/api-docs").permitAll()
-                .antMatchers("/users/signin").permitAll()
+                .antMatchers("/api/v1/users/signin").permitAll()
                 .antMatchers("/api/v1/products/**").permitAll()
-                .antMatchers("users/register").permitAll()
-                .antMatchers("users/login").permitAll()
+                .antMatchers("/api/v1/users/login").permitAll()
+                .antMatchers("/api/v1/users/register").permitAll()
                 //si quiero cambiar .hasAutority
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
             .and()
                 //macunfla
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

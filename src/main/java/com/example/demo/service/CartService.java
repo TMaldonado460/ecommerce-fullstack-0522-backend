@@ -5,13 +5,12 @@ import com.example.demo.entity.Product;
 import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
+@Service
 public class CartService implements CartServiceInterface {
     @Autowired
     private  ProductRepository productRepository;
@@ -63,7 +62,15 @@ public class CartService implements CartServiceInterface {
     @Override
     public void addToCart(Product product, UUID id) {
         Cart cart = cartRepository.findByUserInfoId(id);
-        cart.addProduct(product);
+        if (product.getId() == null) {
+            throw new IllegalArgumentException("Product not found");
+        }
+        Optional<Product> productPersisted = productRepository.findById(product.getId());
+        if (productPersisted.isPresent()) {
+            cart.addProduct(productPersisted.get());
+        } else {
+            throw new IllegalArgumentException("Product not found");
+        }
         cartRepository.save(cart);
 
 

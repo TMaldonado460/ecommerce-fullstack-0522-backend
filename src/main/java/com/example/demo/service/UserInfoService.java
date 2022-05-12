@@ -11,6 +11,7 @@ import com.example.demo.repository.BillRepository;
 import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.ReviewRepository;
 import com.example.demo.security.entity.UserInfo;
+import com.example.demo.security.entity.UserRoles;
 import com.example.demo.security.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -40,7 +41,7 @@ public class UserInfoService {
     CartRepository cartRepository;
 
     @Autowired
-    private static BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
 
@@ -110,8 +111,22 @@ public class UserInfoService {
 //    }
 
     public Object registrer(UserInfo u) {
+        // encriptamos la contraseña
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-        return userInfoRepository.save(u);
+        // asignamos un rol
+        u.setRoles(UserRoles.ROLE_USER);
+        // guardamos el usuario
+        UserInfo userSaved = userInfoRepository.save(u);
+
+        // creamos una cart para el usuario
+        Cart cart = new Cart();
+        // le asignamos un id
+        cart.setUserInfo(userSaved);
+        // guardamos la cart
+        cartRepository.save(cart);
+
+
+        return userSaved;
     }
 
     //los metodos static:

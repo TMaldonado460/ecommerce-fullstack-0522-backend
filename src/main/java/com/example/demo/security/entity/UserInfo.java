@@ -49,7 +49,7 @@ public class UserInfo implements UserDetails {
     @OneToMany(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
     private Set<Adress> adressList;
 
-    @OneToOne(mappedBy = "userInfo",cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "userInfo")
     private Cart cart;
 
     //Agrego las relaciones de "One to Many" desde la clase UserInfo a las clases Review y Bill

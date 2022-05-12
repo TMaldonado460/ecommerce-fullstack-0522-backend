@@ -87,7 +87,8 @@ public class UserController {
         return (ResponseEntity<?>) model.addAttribute("user", new UserInfoDTO());
     }
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @ModelAttribute UserInfo userInfo, BindingResult result,Model model) {
+    // cosa falopa @ModelAttribute
+    public ResponseEntity<?> register(@RequestBody @Valid UserInfo userInfo, BindingResult result,Model model) {
         if(result.hasErrors()) {
             return ResponseEntity.badRequest().body(result.getAllErrors());
         }else {
@@ -122,7 +123,4 @@ public class UserController {
 
 
 
-
 }
-
-
