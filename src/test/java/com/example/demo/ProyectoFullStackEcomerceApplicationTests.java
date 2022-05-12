@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.repository.BillRepository;
 import com.example.demo.repository.ImageRepository;
 import com.example.demo.repository.ProductRepository;
+import com.example.demo.security.repository.IUserRepository;
 import com.example.demo.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ProyectoFullStackEcomerceApplicationTests {
     @Autowired
-    UserInfoRepository userInfoRepository;
+    IUserRepository userInfoRepository;
 
     @Autowired
     BillRepository billRepository;

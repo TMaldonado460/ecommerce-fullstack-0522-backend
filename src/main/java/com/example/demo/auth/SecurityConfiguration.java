@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("users/register").permitAll()
                 .antMatchers("users/login").permitAll()
                 //si quiero cambiar .hasAutority
-                .anyRequest().hasAuthority(UserRoles.ROLE_USER.name())
+                .anyRequest().permitAll()
             .and()
                 //macunfla
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
