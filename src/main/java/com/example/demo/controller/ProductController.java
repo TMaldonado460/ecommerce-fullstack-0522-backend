@@ -32,7 +32,8 @@ public class ProductController {
             @RequestParam(required = false) String attribute,
             @RequestParam(required = false) String order,
             @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) Integer limit,@RequestParam(required = false) String property) {
+            @RequestParam(required = false) Integer limit,
+            @RequestParam(required = false) String property) {
 
         if (attribute == null) {
             attribute = "id";

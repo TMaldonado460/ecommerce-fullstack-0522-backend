@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ArrayProductDTO;
+import com.example.demo.dto.CartDTO;
 import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.entity.Cart;
 import com.example.demo.entity.Image;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.Review;
@@ -132,6 +134,29 @@ public class ProductService {
     public long countByProperty(String property){
         return productRepository.countByProperty(property);
     }
+
+
+
+    public List<CartDTO> findCartByUser(UUID userId){
+        List<Cart> cartList=cartRepository.findByUserInfoId(userId);
+        List<CartDTO> cartDTOList=new ArrayList<>();
+        for (Cart cart:cartList) {
+            cartDTOList.add(mapper.convertValue(cart, CartDTO.class));
+        }
+        return cartDTOList;
+    }
+
+    public List<Cart> addProductToCartList(UUID userId,UUID productId){
+        List<Cart> cartList=cartRepository.findByUserInfoId(userId);
+        List<Cart> cartListForProduct=cartRepository.addProductToCart(userId,productId);
+
+        for (Cart cart:cartList) {
+            cartList
+
+        }
+        return cartDTOList;
+    }
+
 
 
 

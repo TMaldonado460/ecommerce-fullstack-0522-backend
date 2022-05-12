@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,7 +77,7 @@ public class UserController {
     }
     //Registrar
 
-    @GetMapping("/registrer")
+    @GetMapping("/register")
     public ResponseEntity<?> registrer(Model model) {
         return (ResponseEntity<?>) model.addAttribute("user", new UserInfoDTO());
     }
@@ -90,8 +92,28 @@ public class UserController {
     }
 
     //Login
+    @GetMapping("/login")
+    public ResponseEntity<?> login(Model model) {
+        return (ResponseEntity<?>) model.addAttribute("user", new UserInfoDTO());
+    }
+
     //acceder a atributos propios del usuario(review, carrito, etc)
+
     //problemas posibles:recuperar usario e id
+
+
+    @PostMapping("/login")
+    public String login(@RequestAttribute("username") String userName, @RequestAttribute("password")  String password) {
+        //does the authentication
+        final Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        userName,
+                        password
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return "index";
+    }
 
 
 }

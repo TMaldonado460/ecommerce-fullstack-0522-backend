@@ -1,11 +1,14 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.CartDTO;
 import com.example.demo.dto.UserInfoDTO;
 import com.example.demo.entity.Adress;
 import com.example.demo.entity.Bill;
+import com.example.demo.entity.Cart;
 import com.example.demo.entity.Review;
 import com.example.demo.repository.AdressRepository;
 import com.example.demo.repository.BillRepository;
+import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.ReviewRepository;
 import com.example.demo.security.entity.UserInfo;
 import com.example.demo.security.repository.IUserRepository;
@@ -16,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,6 +36,8 @@ public class UserInfoService {
     AdressRepository adressRepository;
 
     BillRepository billRepository;
+
+    CartRepository cartRepository;
 
     @Autowired
     private static BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -56,6 +62,10 @@ public class UserInfoService {
     @Autowired
     public void setUserInfoRepository(IUserRepository userInfoRepository) {
         this.userInfoRepository = userInfoRepository;
+    }
+    @Autowired
+    public void setCartRepository(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
     }
     private ObjectMapper mapper;
 
@@ -108,6 +118,15 @@ public class UserInfoService {
     //todas las instancias ocupan el mismo espacio de memoria
     //se instancia una vez y no se puede tocar
     //por eso no se puede extender
+    public List<CartDTO> findCartByUser(UUID userId){
+        List<Cart> cartList=cartRepository.findByUserInfoId(userId);
+        List<CartDTO> cartDTOList=new ArrayList<>();
+        for (Cart cart:cartList) {
+            cartDTOList.add(mapper.convertValue(cart, CartDTO.class));
+        }
+        return cartDTOList;
+    }
+
 
 
 
