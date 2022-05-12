@@ -42,8 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v3/api-docs").permitAll()
                 .antMatchers("/users/signin").permitAll()
                 .antMatchers("/api/v1/products/**").permitAll()
-                .antMatchers("user/register").permitAll()
-                .any
+                .antMatchers("users/register").permitAll()
+                .antMatchers("users/login").permitAll()
                 //si quiero cambiar .hasAutority
                 .anyRequest().hasAuthority(UserRoles.ROLE_USER.name())
             .and()

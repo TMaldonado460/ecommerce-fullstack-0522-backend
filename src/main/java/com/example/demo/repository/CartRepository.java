@@ -19,6 +19,5 @@ public interface CartRepository extends JpaRepository<Cart, UUID> {
     @Query
     List<Cart> findByUserInfoId(UUID userId);
 
-    @Query
-    List<Cart> addProductToCart(UUID userId, UUID productId);
+
 }

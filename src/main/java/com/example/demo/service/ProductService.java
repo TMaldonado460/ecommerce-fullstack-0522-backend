@@ -146,16 +146,7 @@ public class ProductService {
         return cartDTOList;
     }
 
-    public List<Cart> addProductToCartList(UUID userId,UUID productId){
-        List<Cart> cartList=cartRepository.findByUserInfoId(userId);
-        List<Cart> cartListForProduct=cartRepository.addProductToCart(userId,productId);
 
-        for (Cart cart:cartList) {
-            cartList
-
-        }
-        return cartDTOList;
-    }
 
 
 
