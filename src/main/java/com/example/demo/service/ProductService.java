@@ -137,14 +137,6 @@ public class ProductService {
 
 
 
-    public List<CartDTO> findCartByUser(UUID userId){
-        List<Cart> cartList=cartRepository.findByUserInfoId(userId);
-        List<CartDTO> cartDTOList=new ArrayList<>();
-        for (Cart cart:cartList) {
-            cartDTOList.add(mapper.convertValue(cart, CartDTO.class));
-        }
-        return cartDTOList;
-    }
 
 
 

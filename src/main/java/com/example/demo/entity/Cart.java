@@ -42,4 +42,7 @@ public class Cart {
     )
     private Set<Product> products = new HashSet<>();
 
+    public void addProduct(Product product) {
+        products.add(product);
+    }
 }

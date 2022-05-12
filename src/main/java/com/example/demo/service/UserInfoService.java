@@ -118,14 +118,7 @@ public class UserInfoService {
     //todas las instancias ocupan el mismo espacio de memoria
     //se instancia una vez y no se puede tocar
     //por eso no se puede extender
-    public List<CartDTO> findCartByUser(UUID userId){
-        List<Cart> cartList=cartRepository.findByUserInfoId(userId);
-        List<CartDTO> cartDTOList=new ArrayList<>();
-        for (Cart cart:cartList) {
-            cartDTOList.add(mapper.convertValue(cart, CartDTO.class));
-        }
-        return cartDTOList;
-    }
+
 
 
 
