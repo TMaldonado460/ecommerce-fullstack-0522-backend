@@ -5,6 +5,7 @@ import com.example.demo.dto.UserInfoDTO;
 import com.example.demo.security.UserDetailsServiceImpl;
 import com.example.demo.security.components.JwtUtil;
 import com.example.demo.security.entity.UserInfo;
+import com.example.demo.service.CartService;
 import com.example.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +37,12 @@ public class UserController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @Autowired
+    private CartService cartService;
+
 
     @PostMapping("/signin")
+    //el map tiene un mapa con usuario y contraseña
     public ResponseEntity<?> createAuthenticationToken(@RequestBody Map<String, String> loginRequest) throws Exception {
         try {
             authenticationManager.authenticate(
@@ -112,8 +117,10 @@ public class UserController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "index";
+        return "";
     }
+
+
 
 
 }

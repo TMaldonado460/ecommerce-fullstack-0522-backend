@@ -17,7 +17,7 @@ public interface CartRepository extends JpaRepository<Cart, UUID> {
 //    public Cart findByUserInfoId(UUID userId);
 
     @Query
-    List<Cart> findByUserInfoId(UUID userId);
+    Cart findByUserInfoId(UUID userId);
 
 
 }
