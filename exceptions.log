@@ -24,3 +24,4 @@
 [2022-05-12 16:17:01] [ ERROR] [GlobalExceptionHandler:17] Product not found -- uri=/api/v1/cart/;client=0:0:0:0:0:0:0:1;user=tomasito
 [2022-05-12 16:18:54] [ ERROR] [GlobalExceptionHandler:17] Product not found -- uri=/api/v1/cart/;client=0:0:0:0:0:0:0:1;user=tomasito
 [2022-05-12 16:19:40] [ ERROR] [GlobalExceptionHandler:17] Product not found -- uri=/api/v1/cart/;client=0:0:0:0:0:0:0:1;user=tomasito
+[2022-05-12 16:21:10] [ ERROR] [GlobalExceptionHandler:17] Product not found -- uri=/api/v1/cart/;client=0:0:0:0:0:0:0:1;user=tomasito2

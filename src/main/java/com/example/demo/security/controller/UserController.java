@@ -66,20 +66,6 @@ public class UserController {
         return null;
     }
 
-    private class AuthenticationResponse {
-        private final String jwt;
-        private final Collection<? extends GrantedAuthority> authorities;
-        public AuthenticationResponse(String jwt, Collection<? extends GrantedAuthority> authorities) {
-            this.jwt = jwt;
-            this.authorities = authorities;
-        }
-        public String getJwt() {
-            return jwt;
-        }
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-            return authorities;
-        }
-    }
     //Registrar
 
     @GetMapping("/register")
@@ -119,6 +105,23 @@ public class UserController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return "";
+    }
+
+
+
+    private class AuthenticationResponse {
+        private final String jwt;
+        private final Collection<? extends GrantedAuthority> authorities;
+        public AuthenticationResponse(String jwt, Collection<? extends GrantedAuthority> authorities) {
+            this.jwt = jwt;
+            this.authorities = authorities;
+        }
+        public String getJwt() {
+            return jwt;
+        }
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return authorities;
+        }
     }
 
 
